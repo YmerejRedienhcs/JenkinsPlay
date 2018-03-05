@@ -15,7 +15,7 @@ pipeline {
               '''
               timeout(time: 3, unit: 'MINUTES') {
                 retry(1000) {
-                  sh 'curl jeredith.com/jenkinstest.html | grep success'
+                  sh 'curl jeredith.com/jenkinstest.html 2>/dev/null | grep success'
                   sh 'sleep 1'
                 }
               } 
