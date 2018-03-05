@@ -19,13 +19,10 @@ pipeline {
                   sh 'sleep 10'
                   sh 'curl jeredith.com/jenkinstest.html 2>/dev/null | grep success'
                 }
-                retry(3) {
-                  sh 'date'
-                  sh 'sleep 10'
-                  sh 'curl jeredith.com/jenkinstest.html 2>/dev/null | grep moresuccess'
-                }
               } 
             }
         }
+    }
+    post {
     }
 }
