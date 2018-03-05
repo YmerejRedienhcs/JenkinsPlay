@@ -14,10 +14,15 @@ pipeline {
                 ls -lah
               '''
               timeout(time: 1, unit: 'MINUTES') {
-                retry(10) {
+                retry(3) {
                   sh 'date'
                   sh 'sleep 10'
                   sh 'curl jeredith.com/jenkinstest.html 2>/dev/null | grep success'
+                }
+                retry(3) {
+                  sh 'date'
+                  sh 'sleep 10'
+                  sh 'curl jeredith.com/jenkinstest.html 2>/dev/null | grep moresuccess'
                 }
               } 
             }
