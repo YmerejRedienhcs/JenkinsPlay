@@ -14,9 +14,9 @@ pipeline {
                 ls -lah
               '''
               timeout(time: 3, unit: 'MINUTES') {
-                retry(20) {
+                retry(1000) {
                   sh 'curl jeredith.com/jenkinstest.html | grep success'
-                  sh 'sleep 10'
+                  sh 'sleep 1'
                 }
               } 
             }
