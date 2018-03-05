@@ -7,12 +7,18 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'npm --version'
-                sh 'echo "Hello World"'
-                sh '''
-                  echo "Multiline shell steps works too"
-                  ls -lah
-                '''
+              sh 'npm --version'
+              sh 'echo "Hello World"'
+              sh '''
+                echo "Multiline shell steps works too"
+                ls -lah
+              '''
+              timeout(time: 3, unit: 'MINUTES') {
+                retry(20) {
+                  sh 'curl jeredith.com/jenkinstest.html | grep success'
+                  sh 'sleep 10'
+                }
+              } 
             }
         }
     }
