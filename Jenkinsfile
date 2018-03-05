@@ -1,7 +1,7 @@
 pipeline {
-    agent { 
-      docker { 
-        image 'node:6.3' 
+    agent {
+      docker {
+        image 'node:6.3'
       }
     }
     stages {
@@ -19,10 +19,22 @@ pipeline {
                   sh 'sleep 10'
                   sh 'curl jeredith.com/jenkinstest.html 2>/dev/null | grep success'
                 }
-              } 
+              }
             }
         }
     }
     post {
+      always {
+        echo 'This always runs after stages'
+      }
+      success {
+        echo 'Success after stages!'
+      }
+      unstable {
+        echo 'Ruh-roh -- getting unstable!'
+      }
+      changed {
+        echo 'Pipeline state has changed...'
+      }
     }
 }
