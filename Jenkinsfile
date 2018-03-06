@@ -55,9 +55,6 @@ pipeline {
       always {
         echo 'This always runs after stages'
         deleteDir() /* clean up our workspace */
-        slackSend channel: '#e2e-debug',
-                  color: 'good',
-                  message: "The pipeline ${currentBuild.fullDisplayName} completed."
       }
       success {
         echo 'Success after stages!'
