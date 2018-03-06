@@ -8,7 +8,7 @@ pipeline {
     parameters {
       password( name: 'AWS_ACCESS_KEY_ID', defaultValue: '', description: 'AWS Access Key')
       password( name: 'AWS_SECRET_ACCESS_KEY', defaultValue: '', description: 'AWS Secret Key')
-      choice( choices: 'dev\nqa\nprod', description: 'Please select environment to deploy to', name: 'DEPLOY_ENV')
+      choice( choices: 'dev\nqa', description: 'Please select environment to deploy to', name: 'DEPLOY_ENV')
     }
 
     environment {
