@@ -11,25 +11,45 @@ pipeline {
       choice( choices: 'dev\nqa', description: 'Please select environment to deploy to', name: 'ENV')
     }
 
+    environment {
+      TUTORIAL_GLOBAL_ENV_VAR_1 = 'true'
+    }
+
     stages {
-        stage('build') {
-            steps {
-              sh 'npm --version'
-              sh 'node --version'
-              sh 'echo "Hello World"'
-              sh '''
-                echo "Multiline shell steps works too"
-                ls -lah
-              '''
-              timeout(time: 1, unit: 'MINUTES') {
-                retry(3) {
-                  sh 'date'
-                  sh 'sleep 10'
-                  sh 'curl jeredith.com/jenkinstest.html 2>/dev/null | grep success'
-                }
-              }
-            }
+      stage('build') {
+        environment {
+          TUTORIAL_BUILD_STAGE_ENV_VAR_1 = 'true'
         }
+        steps {
+          sh 'echo "Hello, World, we are building"'
+          sh 'printenv'
+          sh 'npm --version'
+          sh 'node --version'
+          sh '''
+            echo "Multiline shell steps works too"
+            ls -lah
+          '''
+          timeout(time: 1, unit: 'MINUTES') {
+            retry(3) {
+              sh 'date'
+              sh 'sleep 10'
+              sh 'curl jeredith.com/jenkinstest.html 2>/dev/null | grep success'
+            }
+          }
+        }
+      }
+      stage('deploy') {
+        environment {
+          TUTORIAL_DEPLOY_STAGE_ENV_VAR_1 = 'true'
+        }
+        steps {
+          sh 'echo "Hello World, we are deploying."'
+          sh 'printenv'
+          sh 'npm --version'
+          sh 'node --version'
+        }
+      }
+
     }
     post {
       always {
