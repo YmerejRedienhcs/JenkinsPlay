@@ -38,6 +38,11 @@ pipeline {
           }
         }
       }
+      stage('sanity check') {
+        steps {
+          input "All good?  Ready to deploy?"
+        }
+      }
       stage('deploy') {
         environment {
           TUTORIAL_DEPLOY_STAGE_ENV_VAR_1 = 'true'
