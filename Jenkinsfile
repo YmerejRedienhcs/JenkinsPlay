@@ -4,6 +4,11 @@ pipeline {
         image 'node:6.3'
         // image 'node:7-alpine'
       }
+      parameters {
+        password( name: 'AWS_ACCESS_KEY_ID', defaultValue: '', description: 'AWS Access Key')
+        password( name: 'AWS_SECRET_ACCESS_KEY', defaultValue: '', description: 'AWS Secret Key')
+        choice( choices: 'dev\nqa', description: 'Please select environment to deploy to', name: 'ENV')
+      }
     }
     stages {
         stage('build') {
