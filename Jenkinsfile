@@ -21,7 +21,7 @@ pipeline {
           TUTORIAL_BUILD_STAGE_ENV_VAR_1 = 'true'
         }
         steps {
-          sh 'echo "Hello, World, we are building"'
+          sh 'echo "Hello, World.  We are building"'
           sh 'printenv'
           sh 'npm --version'
           sh 'node --version'
@@ -43,7 +43,7 @@ pipeline {
           TUTORIAL_DEPLOY_STAGE_ENV_VAR_1 = 'true'
         }
         steps {
-          sh 'echo "Hello World, we are deploying."'
+          sh 'echo "Hello, World.  We are deploying."'
           sh 'printenv'
           sh 'npm --version'
           sh 'node --version'
@@ -54,6 +54,7 @@ pipeline {
     post {
       always {
         echo 'This always runs after stages'
+        deleteDir() /* clean up our workspace */
       }
       success {
         echo 'Success after stages!'
